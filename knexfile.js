@@ -1,44 +1,76 @@
 // Update with your config settings.
-
+require('dotenv').config({ path: '/.env'})
 module.exports = {
-
   development: {
-    client: 'sqlite3',
+    client: 'pg',
     connection: {
-      filename: './dev.sqlite3'
+      database: 'subwar',
+      user: 'postgres',
+      password: 'postgres',
+      host: 'localhost',
+      port: 5432
+    },
+    migrations: {
+      directory: './data/migrations'
+    },
+    seeds: {
+      directory: './data/seeds'
     }
   },
-
+  test: {
+    client: 'pg',
+    connection: {
+      database: 'subwar',
+      user: 'postgres',
+      password: 'postgres',
+      host: 'localhost',
+      port: 5432
+    },
+    migrations: {
+      directory: './data/migrations'
+    },
+    seeds: {
+      directory: './data/seeds'
+    }
+  },
   staging: {
-    client: 'postgresql',
+    client: 'pg',
+    // eslint-disable-next-line linebreak-style
+    // deploy stage
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      host: process.env.S_HOST,
+      user: process.env.S_USER,
+      password: process.env.S_PASS,
+      database: process.env.S_DB
     },
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      tableName: 'knex_migrations'
+      directory: './data/migrations'
+    },
+    seeds: {
+      directory: './data/seeds'
     }
   },
-
   production: {
-    client: 'postgresql',
+    client: 'pg',
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      host: process.env.PG_HOST,
+      user: process.env.PG_USER,
+      password: process.env.PG_PASS,
+      database: process.env.PG_DB
     },
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      tableName: 'knex_migrations'
+      directory: './data/migrations'
+    },
+    seeds: {
+      directory: './data/seeds'
     }
   }
-
 };
