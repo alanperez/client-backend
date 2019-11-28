@@ -1,13 +1,12 @@
 const express = require("express");
 const server = express();
-exports.server = server;
 require("dotenv").config();
 
 // Config
-require("./config/passport");
+// require("./config/passport");
 
 // Middlewares
-require("./middlewares");
+// require("./middlewares");
 
 // Routes
 server.use("/", require("./routes"));
@@ -17,3 +16,5 @@ server.listen(port, () => {
   const serverRunMsg = `Server is active and listening on http://127.0.0.1:${port}`;
   console.log(serverRunMsg);
 });
+
+  module.exports = server;
