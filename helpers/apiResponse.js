@@ -15,6 +15,7 @@ class ApiResponse {
     };
     return res.status(500).json(data);
   }
+  
   static notFound(res, msg) {
     let data = {
       success: false,
