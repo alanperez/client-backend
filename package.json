@@ -1,9 +1,12 @@
 {
-  "name": "trick-backend",
+  "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
-  "author": "Alan Perez <alanp9six@gmail.com>",
+  "author": "Alan Perez <perezxalan@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start:dev": "nodemon index.js"
+  },
   "devDependencies": {
     "nodemon": "^2.0.1"
   },
