@@ -30,6 +30,14 @@ exports.up = function (knex) {
     tbl.boolean('isApproved').defaultTo(false);
 
     tbl.boolean('isAccepting').defaultTo(true);
+
+    tbl.integer('submission_id')
+      .unsigned()
+      .notNullable()
+      .references('id')
+      .inTable('admin')
+      .onDelete('CASCADE')
+      .onUpdate('CASCADE');
   });
 };
 exports.down = function (knex) {
