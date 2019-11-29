@@ -1,40 +1,35 @@
-const { Model } = require("objection");
+const db = require('../data/dbConfig');
 
-class User extends Model {
-  static get tableName() {
-    return "submissions";
-  }
+module.exports = {
+  getSubmissionsById,
+  insertSubmission,
+  updateSubmission,
+  deleteSubmission,
+  rateSubmission,
+};
 
-  static get idColumn() {
-    return "id";
-  }
 
-  static get jsonSchema() {
-    return {
-      type: "object",
-      required: ["twitch_name", "discord_name", "server", "rank_division","summoner_name","primary_role","secondary_role","email"],
-      properties: {
-        id: { type: "integer" },
-        email: { type: "string", minLength: 5, maxLength: 255 },
-        password: { type: "string", minLength: 10, maxLength: 255 },
-        date: { type: "date" }
-      }
-    };
-  }
 
-  static get relationMappings() {
-    const UserProfile = require("./profiles.model");
-    return {
-      profiles: {
-        relation: Model.HasManyRelation,
-        modelClass: UserProfile,
-        join: {
-          from: "user.id",
-          to: "user_profile.user_profile"
-        }
-      }
-    };
-  }
+
+function getSubmissionById(id) {
+  return db('submissions').where({ id })
+    .first();
 }
 
-module.exports = User;
+async function addSubmission(submission) {
+  const response = await db('submissions').insert(submission);
+  return response;
+}
+
+
+function updateSubmision(id, update) {
+  return db('submissions')
+    .where('id', id)
+    .update(update);
+}
+
+function delSubmision(id) {
+  return db('submissions')
+    .where('id', id)
+    .del();
+}
