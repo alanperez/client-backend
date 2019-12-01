@@ -13,4 +13,16 @@ async function getUserSubmissions(req,res) {
   
 }
 
+
+async function approveUserSubmission(req,res) {
+  const { id } = req.params;
+  const { isApproved } = req.body;
+  admin.approveSubmission(id, isApproved).then((problem) => {
+    if (isApproved === true) {
+      return apiResponse.success(res, "Approved")
+    } else {
+      return apiResponse.error(res, "Could not approve at this time")
+    }
+  })
+}
 module.exports = { getUserSubmissions }
