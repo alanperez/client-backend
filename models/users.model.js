@@ -1,6 +1,7 @@
 const db = require('../data/dbConfig');
 
 module.exports = {
+  insertUser,
   getSubmissionsById,
   insertSubmission,
   updateSubmission,
@@ -9,7 +10,10 @@ module.exports = {
 };
 
 
-
+async function insertUser(user) {
+ const [id] = await db('await').insert(user)
+ return db('user').where({ id }).first()
+}
 
 function getSubmissionById(id) {
   return db('submissions').where({ id })
